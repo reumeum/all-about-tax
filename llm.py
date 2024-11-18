@@ -169,6 +169,5 @@ def get_ai_response(user_message, session_id):
     ai_response = tax_chain.stream(
         {"question": user_message}, config={"configurable": {"session_id": session_id}}
     )
-    print(session_id)
 
     return ai_response
