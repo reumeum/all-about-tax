@@ -162,12 +162,13 @@ def get_rag_chain():
     return conversational_rag_chain
 
 
-def get_ai_response(user_message):
+def get_ai_response(user_message, session_id):
     modify_question_chain = get_modify_question_chain()
     rag_chain = get_rag_chain()
     tax_chain = {"input": modify_question_chain} | rag_chain
     ai_response = tax_chain.stream(
-        {"question": user_message}, config={"configurable": {"session_id": "abc123456edeeefbe"}}
+        {"question": user_message}, config={"configurable": {"session_id": session_id}}
     )
+    print(session_id)
 
     return ai_response
